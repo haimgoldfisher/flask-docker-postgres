@@ -1,0 +1,27 @@
+
+# create volume for persistency and a network for communication between the containers
+docker network create flask-gres-net
+docker volume create postgres-vol
+
+# run the postgres container with the neccessary parameters
+    docker run -e POSTGRES_DB=postgresdb -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin --name my-postgres -v postgres-vol:/var/lib/postgresql/ --network flask-gres-net -p 5432:5432 postgres
+# enter the container to create the table
+    docker exec -it my-postgres /bin/bash
+# connect to the database
+    psql -U admin -d postgresdb
+    ## password is admin if needed
+# create the table
+    CREATE TABLE users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50));
+
+
+# build the flask app image
+docker build -t my-app:1.1 .
+docker run -p 5555:5555 --network flask-gres-net  my-app:1.1
+
+# send some requests to check the app functionaliy and communication with postgres
+    ## add a user
+    POST -H 'Content-Type: application/json' -d '{"name": "kinan"}' http://127.0.0.1:5555/users
+    ## get all users
+    curl -i -X GET http://127.0.0.1:5555/users
