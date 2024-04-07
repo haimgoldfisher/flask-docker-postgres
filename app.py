@@ -28,17 +28,17 @@ class Team(db.Model):
     League_NL = db.Column(db.Integer, nullable=False)
     Playoffs_1 = db.Column(db.Integer, nullable=False)
     RD = db.Column(db.Float, nullable=True)
-    def __init__(self, year, obp, slg, ba, g, oobp, oslg, league_nl, playoffs_1, rd):
-        self.Year = year
-        self.OBP = obp
-        self.SLG = slg
-        self.BA = ba
-        self.G = g
-        self.OOBP = oobp
-        self.OSLG = oslg
-        self.League_NL = league_nl
-        self.Playoffs_1 = playoffs_1
-        self.RD = rd
+    def __init__(self, Year, OBP, SLG, BA, G, OOBP, OSLG, League_NL, Playoffs_1, RD):
+        self.Year = Year
+        self.OBP = OBP
+        self.SLG = SLG
+        self.BA = BA
+        self.G = G
+        self.OOBP = OOBP
+        self.OSLG = OSLG
+        self.League_NL = League_NL
+        self.Playoffs_1 = Playoffs_1
+        self.RD = RD
 
 @app.route("/")
 def home():
@@ -57,7 +57,7 @@ def add_team():
                      OSLG=request_data['OSLG'],
                      League_NL=request_data['League_NL'],
                      Playoffs_1=request_data['Playoffs_1'],
-                     RD = request_data('RD'))
+                     RD = request_data['RD'])
     new_team = pred(new_team)
     db.session.add(new_team)
     db.session.commit()
