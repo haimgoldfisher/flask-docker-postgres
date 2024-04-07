@@ -47,17 +47,17 @@ def home():
 @app.route('/teams', methods=['POST'])
 def add_team():
     request_data = request.get_json()
-    request_data = pred(request_data)
-    new_team = Team( Year= request_data['year'],
-                     OBP=request_data['obp'],
-                     SLG=request_data['slg'],
-                     BA=request_data['ba'],
-                     G=request_data['g'],
-                     OOBP=request_data['oobp'],
-                     OSLG=request_data['oslg'],
-                     League_NL=request_data['league_nl'],
-                     Playoffs_1=request_data['playoffs_1'],
-                     RD = request_data('rd'))
+    request_data['RD'] = pred(request_data)
+    new_team = Team( Year= request_data['Year'],
+                     OBP=request_data['OBP'],
+                     SLG=request_data['SLG'],
+                     BA=request_data['BA'],
+                     G=request_data['G'],
+                     OOBP=request_data['OOBP'],
+                     OSLG=request_data['OSLG'],
+                     League_NL=request_data['League_NL'],
+                     Playoffs_1=request_data['Playoffs_1'],
+                     RD = request_data('RD'))
     new_team = pred(new_team)
     db.session.add(new_team)
     db.session.commit()
