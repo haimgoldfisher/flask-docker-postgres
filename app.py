@@ -58,7 +58,6 @@ def add_team():
                      League_NL=request_data['League_NL'],
                      Playoffs_1=request_data['Playoffs_1'],
                      RD = request_data['RD'])
-    new_team = pred(new_team)
     db.session.add(new_team)
     db.session.commit()
     return "Team added successfully"
