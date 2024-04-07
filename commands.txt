@@ -11,9 +11,19 @@ docker volume create postgres-vol
     psql -U admin -d postgresdb
     ## password is admin if needed
 # create the table
-    CREATE TABLE users(
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(50));
+CREATE TABLE teams (
+    id serial primary key,
+    year integer,
+    obp float,
+    slg float,
+    ba float,
+    g integer,
+    oobp float,
+    oslg float,
+    league_nl boolean,
+    playoffs_1 boolean,
+    rd float
+);
 
 
 # build the flask app image

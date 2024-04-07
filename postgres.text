@@ -1,5 +1,5 @@
-docker network create postgres_nw
+docker network create postgres_nw1
 
-docker run --name postgres_server -e POSTGRES_PASSWORD=start123 -d --network postgres_nw  postgres
+docker run --name postgres_server1 -e POSTGRES_PASSWORD=start123 -d --network postgres_nw1  postgres
 
-docker run -it --rm --network postgres_nw postgres psql -h postgres_server -U postgres
+docker run -it --rm --network postgres_nw1 postgres psql -h postgres_server1 -U postgres
