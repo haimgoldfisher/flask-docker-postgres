@@ -13,16 +13,16 @@ docker volume create postgres-vol
 # create the table
 CREATE TABLE teams (
     id serial primary key,
-    year integer,
-    obp float,
-    slg float,
-    ba float,
-    g integer,
-    oobp float,
-    oslg float,
-    league_nl boolean,
-    playoffs_1 boolean,
-    rd float
+    Year integer,
+    OBP float,
+    SLG float,
+    BA float,
+    G integer,
+    OOBP float,
+    OSLG float,
+    League_NL boolean,
+    Playoffs_1 boolean,
+    RD float
 );
 
 
