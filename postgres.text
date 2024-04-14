@@ -3,3 +3,23 @@ docker network create postgres_nw1
 docker run --name functions_for_practice-postgres_server-1 -e POSTGRES_PASSWORD=start123 -d --network postgres_nw1  postgres
 
 docker run -it --rm --network postgres_nw1 postgres psql -h functions_for_practice-postgres_server-1 -U postgres
+
+CREATE DATABASE teamsdb;
+
+\connect teamsdb;
+
+CREATE TABLE teams (
+    id serial primary key,
+    Year integer,
+    OBP float,
+    SLG float,
+    BA float,
+    G integer,
+    OOBP float,
+    OSLG float,
+    League_NL boolean,
+    Playoffs_1 boolean,
+    RD float
+);
+
+\dt
