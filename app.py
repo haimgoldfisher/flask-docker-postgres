@@ -18,27 +18,27 @@ db.init_app(app)
 class Team(db.Model):
     __tablename__ = "teams"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    Year = db.Column(db.Integer, nullable=False)
-    OBP = db.Column(db.Float, nullable=False)
-    SLG = db.Column(db.Float, nullable=False)
-    BA = db.Column(db.Float, nullable=False)
-    G = db.Column(db.Integer, nullable=False)
-    OOBP = db.Column(db.Float, nullable=False)
-    OSLG = db.Column(db.Float, nullable=False)
-    League_NL = db.Column(db.Integer, nullable=False)
-    Playoffs_1 = db.Column(db.Integer, nullable=False)
-    RD = db.Column(db.Float, nullable=True)
+    year = db.Column(db.Integer, nullable=False)
+    obp = db.Column(db.Float, nullable=False)
+    slg = db.Column(db.Float, nullable=False)
+    ba = db.Column(db.Float, nullable=False)
+    g = db.Column(db.Integer, nullable=False)
+    oobp = db.Column(db.Float, nullable=False)
+    oslg = db.Column(db.Float, nullable=False)
+    league_nl = db.Column(db.Boolean, nullable=False)
+    playoffs_1  = db.Column(db.Boolean, nullable=False)
+    rd = db.Column(db.Float, nullable=True)
     def __init__(self, Year, OBP, SLG, BA, G, OOBP, OSLG, League_NL, Playoffs_1, RD):
-        self.Year = Year
-        self.OBP = OBP
-        self.SLG = SLG
-        self.BA = BA
-        self.G = G
-        self.OOBP = OOBP
-        self.OSLG = OSLG
-        self.League_NL = League_NL
-        self.Playoffs_1 = Playoffs_1
-        self.RD = RD
+        self.year = Year
+        self.obp = OBP
+        self.slg = SLG
+        self.ba = BA
+        self.g = G
+        self.oobp = OOBP
+        self.oslg = OSLG
+        self.league_nl = League_NL
+        self.playoffs_1 = Playoffs_1
+        self.rd = RD
 
 @app.route("/")
 def home():
@@ -67,7 +67,18 @@ def show_teams():
     teams = Team.query.all()
     team_list = {}
     for team in teams:
-        team_list[team.id] = team.Year
+        team_list[team.id] = {
+            'Year': team.year,
+            'OBP': team.obp,
+            'SLG': team.slg,
+            'BA': team.ba,
+            'G': team.g,
+            'OOBP': team.oobp,
+            'OSLG': team.oslg,
+            'League_NL': team.league_nl,
+            'Playoffs_1': team.playoffs_1,
+            'RD': team.rd
+        }
     return team_list
 
 if __name__ == "__main__":
